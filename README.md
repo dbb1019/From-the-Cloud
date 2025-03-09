@@ -1,10 +1,10 @@
 # **From the Cloud**  
 
-![From the Cloud](./assets/image.png)
-
 ### *An experiment with words and clouds*
 
 🌥️ Visit → [https://from-the-cloud.vercel.app/](https://from-the-cloud.vercel.app/)
+
+![From the Cloud](./assets/image.png)
 
 Clouds are ephemeral and untouchable, long perceived as carriers of human emotions and metaphors of impermanence.  
 However, in the digital age, "the cloud" has been redefined as a rigid repository of data and algorithmic control.  

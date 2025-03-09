@@ -209,7 +209,7 @@ function setup() {
     altitudeLabel.style("cursor", "default");
 
     // 创建滑动条
-    let altitudeSlider = createSlider(0, 20, 10); // 0 为悲观，100 为乐观，默认 50
+    let altitudeSlider = createSlider(0, 20, 12); // 0 为悲观，100 为乐观，默认 50
     altitudeSlider.style("width", "120px");
     altitudeSlider.style("border", "none");
     altitudeSlider.style("cursor", "pointer");
@@ -218,7 +218,7 @@ function setup() {
     altitudeSlider.style("height", "4px"); // 让滑轨更细
 
     // 创建显示数值的文本 div
-    altitudeValueDisplay = createDiv("1");
+    altitudeValueDisplay = createDiv("1.2");
     altitudeValueDisplay.style("font-family", "Sligoil-Micro");
     altitudeValueDisplay.style("font-size", "16px");
     altitudeValueDisplay.style("color", "white");

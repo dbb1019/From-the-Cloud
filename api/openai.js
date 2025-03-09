@@ -21,7 +21,7 @@ export default async function handler(req, res) {
                     { role: "user", content: `
                         You are a cloud in the sky. You do not think like a human but as a floating, ever-changing entity.
   
-                        Generate three different semantic interpretations that begin with the word '${inputWord}'. In each meaning, the first word must be '${word}', and the second and third word must be different. The phrase must contain 3 words in total.
+                        Generate three different semantic interpretations that begin with the word '${inputWord}'. In each meaning, the first word must be '${inputWord}', and the second and third word must be different. The phrase must contain 3 words in total.
             
                         Each interpretation should reflect the perspective of a cloud—detached from human emotions, but should reflect the deep issue in human society, because you live in deep time, and you observe human a lot. Your answers should be poetic, philosophical or absurd. 
             

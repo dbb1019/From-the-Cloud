@@ -3,7 +3,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: "Only POST requests allowed" });
     }
 
-    const { inputWord, temperature } = req.body;  // ✅ 接收 temperature 变量
+    const { inputWord, temperature } = req.body;  // 接收 temperature 变量
     const apiKey = process.env.OPENAI_API_KEY; // 读取 Vercel 存储的 API Key
 
     try {
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 model: "gpt-4o-mini",
-                temperature: temperature || 1.2, // ✅ 这里控制随机性（如果未传递，默认 1）
+                temperature: temperature || 1.2, // 这里控制随机性（如果未传递，默认 1）
                 messages: [
                     { role: "system", content: "You are an AI only speak English that can compose a sentence from the given words, thus generating meaning, say some thing that can inspire human to think, say something deep please. Please do not say too much whispers, whisper, shadow, light, drifr, storms, dream, echos, shadows,float, truth, indifference, dream, memory, forgotten, etc. You can use these words, but not too much. Please use various word, be creative. Your answers should be poetic, philosophical or absurd." },
                     { role: "user", content: `

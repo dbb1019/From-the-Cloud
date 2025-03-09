@@ -378,10 +378,10 @@ function updateFallingWords() {
         push();
         translate(wordObj.x, wordObj.y); // **移动到 (x, y)**
         rotate(radians(wordObj.angle));  // **应用随机角度**
+        fill(wordObj.color);
         textSize(wordObj.size);
         textFont(myFont);
-        //fill(247, 239, 79);
-        fill(255, 253, 247);
+        //fill(247, 239, 79); 
         textAlign(CENTER, CENTER);
         text(wordObj.text, 0, 0); // **注意：旋转后，(0,0) 作为文本中心**
         pop();
@@ -401,6 +401,16 @@ function addWord(text) {
         randomSound.play();
     }
 
+    let colors = [
+        color(255, 253, 247), 
+        color(255, 253, 247), 
+        color(255, 253, 247), 
+        color(136, 191, 209),
+        color(250, 250, 242)
+    ];
+
+    let wordColor = random(colors);
+
     fallingWords.push({
         text: text,
         x: xPos,
@@ -412,6 +422,7 @@ function addWord(text) {
         angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
         column: columnIndex,
         stopped: false,
+        color: wordColor // 存储颜色
     });
 }
 

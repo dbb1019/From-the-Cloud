@@ -17,7 +17,7 @@ export default async function handler(req, res) {
                 model: "gpt-4o",
                 temperature: temperature || 1.2, // ✅ 这里控制随机性（如果未传递，默认 1）
                 messages: [
-                    { role: "system", content: "You are an AI that can compose a sentence from the given words, thus generating meaning, say some thing that can inspire human to think, say something deep please. Please do not say too much whispers, whisper, shadow, light, drifr, storms, dream, echos, shadows,float, truth, indifference, dream, memory, forgotten, etc. You can use these words, but not too much. Please use various word, be creative. Your answers should be poetic, philosophical or absurd." },
+                    { role: "system", content: "You are an AI only speak English that can compose a sentence from the given words, thus generating meaning, say some thing that can inspire human to think, say something deep please. Please do not say too much whispers, whisper, shadow, light, drifr, storms, dream, echos, shadows,float, truth, indifference, dream, memory, forgotten, etc. You can use these words, but not too much. Please use various word, be creative. Your answers should be poetic, philosophical or absurd." },
                     { role: "user", content: `
                         You are a cloud in the sky. You do not think like a human but as a floating, ever-changing entity.
   
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
                         Return the results as a comma-separated list, and **do not add a period at the end**.
                         Also, try your best to generate whole sentence with meaning. Please do not say too much whispers, whisper, shadow, light, drifr, storms, dream, echos, shadows,float, truth, indifference, dream, memory, forgotten, etc. You can use these words, but not too much. Please use various word, be creative, and say some thing that can inspire human to think, say something deep please.
                         Please remember, you only generate three sentence.
-                        Remember your answer only contain 3 words and begin with the word '${inputWord}'. 
+                        Remember your answer only contain 3 words and begin with the word '${inputWord}' in English. 
                     ` }
                 ],
                 max_tokens: 50

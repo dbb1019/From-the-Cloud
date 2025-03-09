@@ -421,13 +421,14 @@ function addWord(text) {
     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
     let textSizeRand = random(50, 100);
     let initialY = -textSizeRand;
+
+    let progress = map(initialY, -textSizeRand, height, 0, 1); 
+    let wordColor = lerpColor(gradientStart, gradientEnd, progress); // 计算渐变
+
     let randomSound = random(soundFiles);
      if (randomSound && !randomSound.isPlaying()) {
-        randomSound.play();
-    }
-
-    let hueValue = map(xPos, 0, width, 160, 220); // 控制颜色范围
-    let wordColor = color(`hsl(${hueValue}, 60%, 70%)`); // 使用 HSL 颜色
+         randomSound.play();
+     }
 
     fallingWords.push({
         text: text,
@@ -443,7 +444,6 @@ function addWord(text) {
         color: wordColor
     });
 }
-
 
 
 function saveGeneratedWords() {

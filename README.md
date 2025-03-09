@@ -17,8 +17,13 @@ Are we talking to the cloud, or are we constantly shaping our illusion of the cl
 ### *How to interact?*
 
 Click the blue box, enter a single word (in English), and send it to the cloud.
+
 If the words stack on top of each other but you want to see them clearly (or unclearly), try moving your mouse over the area to reveal them.
+
 Move the Temperature slider to adjust the randomness of the response.
+
 To save all the words, click Save to download them.
+
 If there are too many, click Reload.
+
 Please turn on the volume ▶︎ •၊၊||၊|။|||| |.

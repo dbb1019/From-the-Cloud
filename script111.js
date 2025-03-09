@@ -138,12 +138,12 @@ function setup() {
     infoBox.style("font-family", "Sligoil-Micro");
     infoBox.style("font-size", "14px");
     infoBox.style("color", "rgb(255, 255, 255)"); // 文字颜色
-    infoBox.style("background", "rgb(117, 200, 255)"); // 天蓝色背景
+    infoBox.style("background", "rgb(191, 139, 255)"); 
     infoBox.style("padding", "5px");
     infoBox.style("border-radius", "0px");
     infoBox.style("position", "absolute");
-    infoBox.style("display", "none"); // 初始时隐藏
-    infoBox.style("width", "420px"); // 设置固定宽度
+    infoBox.style("display", "none"); 
+    infoBox.style("width", "420px"); 
     infoBox.style("line-height", "1.5"); // 让文本更容易阅读
 
     // 让 infoBox 在鼠标悬停时显示

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script src="script111.js"></script> 
+    
+    <script>
+        // 禁止 Ctrl + 滚轮缩放
+        document.addEventListener("wheel", function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    
+        // 禁止双指缩放 (触摸屏)
+        document.addEventListener("gesturestart", function(event) {
+            event.preventDefault();
+        });
+    
+        // 禁止 Ctrl + +/- 和 Ctrl + 0 还原缩放
+        document.addEventListener("keydown", function(event) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === "=" || event.key === "-" || event.key === "0")) {
+                event.preventDefault();
+            }
+        });
+    </script>
+    
+  </body>
+</html>

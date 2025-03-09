@@ -6,8 +6,6 @@ let columnHeights = [];
 let altitudeSlider;
 let altitudeValue = 1;
 let soundFiles = []; // 存储音频
-let gradientStart = color(173, 216, 230); // 浅蓝
-let gradientEnd = color(98, 168, 136); // 绿蓝
 
 function preload() {
     myFont = loadFont("assets/TINY5x3-140.otf");
@@ -391,59 +389,29 @@ function updateFallingWords() {
 }
 
 
-// function addWord(text) {
-//     let columnWidth = width / 3;
-//     let columnIndex = fallingWords.length % 3; // 计算在哪一列
-//     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
-//     let textSizeRand = random(50, 100);
-//     let initialY = -textSizeRand; // 初始位置在屏幕上方
-
-//     let randomSound = random(soundFiles);
-//     if (randomSound && !randomSound.isPlaying()) {
-//         randomSound.play();
-//     }
-
-//     fallingWords.push({
-//         text: text,
-//         x: xPos,
-//         y: initialY,
-//         tX: xPos, // 目标 X 坐标
-//         tY: initialY, // 目标 Y 坐标
-//         speed: random(0.1, 3),
-//         size: textSizeRand,
-//         angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
-//         column: columnIndex,
-//         stopped: false,
-//     });
-// }
-
 function addWord(text) {
     let columnWidth = width / 3;
-    let columnIndex = fallingWords.length % 3;
+    let columnIndex = fallingWords.length % 3; // 计算在哪一列
     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
     let textSizeRand = random(50, 100);
-    let initialY = -textSizeRand;
-
-    let progress = map(initialY, -textSizeRand, height, 0, 1); 
-    let wordColor = lerpColor(gradientStart, gradientEnd, progress); // 计算渐变
+    let initialY = -textSizeRand; // 初始位置在屏幕上方
 
     let randomSound = random(soundFiles);
-     if (randomSound && !randomSound.isPlaying()) {
-         randomSound.play();
-     }
+    if (randomSound && !randomSound.isPlaying()) {
+        randomSound.play();
+    }
 
     fallingWords.push({
         text: text,
         x: xPos,
         y: initialY,
-        tX: xPos,
-        tY: initialY,
+        tX: xPos, // 目标 X 坐标
+        tY: initialY, // 目标 Y 坐标
         speed: random(0.1, 3),
         size: textSizeRand,
-        angle: random(-4, 4),
+        angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
         column: columnIndex,
         stopped: false,
-        color: wordColor
     });
 }
 

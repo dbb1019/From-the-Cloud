@@ -288,10 +288,10 @@ function updateChatTone(value) {
 
 function draw() {
     
-    fill("#fcf9f2");
+    //fill("#fcf9f2");
     rect(-2, -2, width+2, height+2); // 透明遮罩
     image(video, 0, 0, width, height); // 画视频作为背景
-    fill(171, 219, 255, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
+    fill(196, 232, 255, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
     rect(-2, -2, width+2, height+2); 
 
     fill(255);

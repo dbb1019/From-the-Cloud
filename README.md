@@ -1,6 +1,8 @@
 # **From the Cloud**  
 ### *An experiment with words and clouds*
 
+![From the Cloud](./assets/image.png)
+
 🌥️ Visit → [https://from-the-cloud.vercel.app/](https://from-the-cloud.vercel.app/)
 
 Clouds are ephemeral and untouchable, long perceived as carriers of human emotions and metaphors of impermanence.  

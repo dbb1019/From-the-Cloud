@@ -34,7 +34,7 @@ function setup() {
     input.style("font-family", "Sligoil-Micro");
     input.style("font-size", "22px");
     input.style("color", "#fcf9f2");
-    input.style("background", "rgb(91, 189, 255)");
+    input.style("background", "rgb(82, 177, 254)");
     input.style("border", "0px solid black");
     input.style("padding", "5px");
     input.style("width", "20px"); 
@@ -44,7 +44,7 @@ function setup() {
     submitButton.style("font-family", "Sligoil-Micro");
     submitButton.style("font-size", "16px");
     submitButton.style("color", "#fcf9f2");
-    submitButton.style("background-color", "rgb(250, 175, 117)");
+    submitButton.style("background-color", "rgb(255, 162, 91)");
     submitButton.style("border", "0px solid white");
     submitButton.style("padding", "5px");
     submitButton.style("cursor", "pointer");
@@ -182,7 +182,7 @@ function setup() {
         );          
         hoverBox.style("font-family", "Sligoil-Micro");
         hoverBox.style("font-size", "14px");
-        hoverBox.style("background", "rgb(252, 180, 249)"); 
+        hoverBox.style("background", "rgb(255, 153, 250)"); 
         //hoverBox.style("border-radius", "5px");
         hoverBox.style("color", "rgb(255, 255, 255)");
         hoverBox.style("cursor", "default"); 
@@ -291,7 +291,7 @@ function draw() {
     fill("#fcf9f2");
     rect(-2, -2, width+2, height+2); // 透明遮罩
     image(video, 0, 0, width, height); // 画视频作为背景
-    fill(204, 241, 255, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
+    fill(171, 219, 255, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
     rect(-2, -2, width+2, height+2); 
 
     fill(255);
@@ -380,7 +380,7 @@ function updateFallingWords() {
         rotate(radians(wordObj.angle));  // **应用随机角度**
         textSize(wordObj.size);
         textFont(myFont);
-        fill(255, 211, 110);
+        fill(247, 239, 79);
         textAlign(CENTER, CENTER);
         text(wordObj.text, 0, 0); // **注意：旋转后，(0,0) 作为文本中心**
         pop();

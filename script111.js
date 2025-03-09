@@ -388,31 +388,57 @@ function updateFallingWords() {
 }
 
 
+// function addWord(text) {
+//     let columnWidth = width / 3;
+//     let columnIndex = fallingWords.length % 3; // 计算在哪一列
+//     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
+//     let textSizeRand = random(50, 100);
+//     let initialY = -textSizeRand; // 初始位置在屏幕上方
+
+//     let randomSound = random(soundFiles);
+//     if (randomSound && !randomSound.isPlaying()) {
+//         randomSound.play();
+//     }
+
+//     fallingWords.push({
+//         text: text,
+//         x: xPos,
+//         y: initialY,
+//         tX: xPos, // 目标 X 坐标
+//         tY: initialY, // 目标 Y 坐标
+//         speed: random(0.1, 3),
+//         size: textSizeRand,
+//         angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
+//         column: columnIndex,
+//         stopped: false,
+//     });
+// }
+
 function addWord(text) {
     let columnWidth = width / 3;
-    let columnIndex = fallingWords.length % 3; // 计算在哪一列
+    let columnIndex = fallingWords.length % 3;
     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
     let textSizeRand = random(50, 100);
-    let initialY = -textSizeRand; // 初始位置在屏幕上方
+    let initialY = -textSizeRand;
 
-    let randomSound = random(soundFiles);
-    if (randomSound && !randomSound.isPlaying()) {
-        randomSound.play();
-    }
+    let hueValue = map(xPos, 0, width, 160, 220); // 控制颜色范围
+    let wordColor = color(`hsl(${hueValue}, 60%, 70%)`); // 使用 HSL 颜色
 
     fallingWords.push({
         text: text,
         x: xPos,
         y: initialY,
-        tX: xPos, // 目标 X 坐标
-        tY: initialY, // 目标 Y 坐标
+        tX: xPos,
+        tY: initialY,
         speed: random(0.1, 3),
         size: textSizeRand,
-        angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
+        angle: random(-4, 4),
         column: columnIndex,
         stopped: false,
+        color: wordColor
     });
 }
+
 
 
 function saveGeneratedWords() {

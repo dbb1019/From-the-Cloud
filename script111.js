@@ -44,7 +44,7 @@ function setup() {
     submitButton.style("font-family", "Sligoil-Micro");
     submitButton.style("font-size", "16px");
     submitButton.style("color", "rgb(240, 250, 255)");
-    submitButton.style("background-color", "rgb(105, 176, 235)");
+    submitButton.style("background-color", "rgb(105, 166, 215)");
     submitButton.style("border", "0px solid white");
     submitButton.style("padding", "5px");
     submitButton.style("cursor", "pointer");
@@ -138,7 +138,7 @@ function setup() {
     infoBox.style("font-family", "Sligoil-Micro");
     infoBox.style("font-size", "14px");
     infoBox.style("color", "rgb(240, 250, 255)"); // 文字颜色
-    infoBox.style("background", "rgb(91, 158, 212)"); 
+    infoBox.style("background", "rgba(91, 157, 212, 0.87)"); 
     infoBox.style("padding", "5px");
     infoBox.style("border-radius", "0px");
     infoBox.style("position", "absolute");

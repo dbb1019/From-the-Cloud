@@ -6,6 +6,8 @@ let columnHeights = [];
 let altitudeSlider;
 let altitudeValue = 1;
 let soundFiles = []; // 存储音频
+let gradientStart = color(173, 216, 230); // 浅蓝
+let gradientEnd = color(98, 168, 136); // 绿蓝
 
 function preload() {
     myFont = loadFont("assets/TINY5x3-140.otf");

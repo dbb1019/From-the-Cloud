@@ -404,6 +404,7 @@ function addWord(text) {
     let colors = [
         color(255, 253, 247), 
         color(255, 253, 247), 
+        color(250, 250, 242),
         color(136, 191, 209)
     ];
 

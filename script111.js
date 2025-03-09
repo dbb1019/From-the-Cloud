@@ -143,7 +143,7 @@ function setup() {
     infoBox.style("border-radius", "0px");
     infoBox.style("position", "absolute");
     infoBox.style("display", "none"); 
-    infoBox.style("width", "420px"); 
+    infoBox.style("width", "420px"); // 设置固定宽度
     infoBox.style("line-height", "1.5"); // 让文本更容易阅读
 
     // 让 infoBox 在鼠标悬停时显示
@@ -182,7 +182,7 @@ function setup() {
         );          
         hoverBox.style("font-family", "Sligoil-Micro");
         hoverBox.style("font-size", "14px");
-        hoverBox.style("background", "rgb(255, 153, 250)"); 
+        hoverBox.style("background", "rgb(255, 136, 255)"); 
         //hoverBox.style("border-radius", "5px");
         hoverBox.style("color", "rgb(255, 255, 255)");
         hoverBox.style("cursor", "default"); 

@@ -1,7 +1,7 @@
 let myFont, inputFont;
 let video;
 let fallingWords = []; // 存储正在下落的文字
-let gravity = 0.25; 
+let gravity = 0.5; 
 let columnHeights = [];
 let altitudeSlider;
 let altitudeValue = 1;

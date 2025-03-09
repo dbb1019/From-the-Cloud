@@ -501,12 +501,16 @@ function saveGeneratedWords() {
 //     }
 // }
 
+
 async function getWordVariations(word) {
     try {
-        const response = await fetch("https://from-the-cloud.vercel.app/api/openai", {  // 🔥 换成你的 Vercel API 地址
+        const response = await fetch("https://from-the-cloud.vercel.app/api/openai", {  // 🔥 替换为你的 Vercel API 地址
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ inputWord: word, temperature: altitudeValue })
+            body: JSON.stringify({
+                inputWord: word,
+                temperature: altitudeValue  // 传递温度参数
+            })
         });
 
         if (!response.ok) {

@@ -291,7 +291,7 @@ function draw() {
     //fill("#fcf9f2");
     rect(-2, -2, width+2, height+2); // 透明遮罩
     image(video, 0, 0, width, height); // 画视频作为背景
-    fill(196, 232, 255, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
+    fill(202, 226, 232, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
     rect(-2, -2, width+2, height+2); 
 
     fill(255);
@@ -380,7 +380,8 @@ function updateFallingWords() {
         rotate(radians(wordObj.angle));  // **应用随机角度**
         textSize(wordObj.size);
         textFont(myFont);
-        fill(247, 239, 79);
+        //fill(247, 239, 79);
+        fill(wordObj.color);
         textAlign(CENTER, CENTER);
         text(wordObj.text, 0, 0); // **注意：旋转后，(0,0) 作为文本中心**
         pop();
@@ -420,6 +421,10 @@ function addWord(text) {
     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
     let textSizeRand = random(50, 100);
     let initialY = -textSizeRand;
+    let randomSound = random(soundFiles);
+     if (randomSound && !randomSound.isPlaying()) {
+        randomSound.play();
+    }
 
     let hueValue = map(xPos, 0, width, 160, 220); // 控制颜色范围
     let wordColor = color(`hsl(${hueValue}, 60%, 70%)`); // 使用 HSL 颜色

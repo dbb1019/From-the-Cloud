@@ -33,8 +33,8 @@ function setup() {
     input.position(50, 99);
     input.style("font-family", "Sligoil-Micro");
     input.style("font-size", "22px");
-    input.style("color", "#fcf9f2");
-    input.style("background", "rgb(82, 177, 254)");
+    input.style("color", "rgb(240, 250, 255)");
+    input.style("background", "rgb(120, 178, 220)");
     input.style("border", "0px solid black");
     input.style("padding", "5px");
     input.style("width", "20px"); 
@@ -43,8 +43,8 @@ function setup() {
     submitButton = createButton("╰┈➤ Send ⋆°•☁︎⋆");
     submitButton.style("font-family", "Sligoil-Micro");
     submitButton.style("font-size", "16px");
-    submitButton.style("color", "#fcf9f2");
-    submitButton.style("background-color", "rgb(255, 162, 91)");
+    submitButton.style("color", "rgb(240, 250, 255)");
+    submitButton.style("background-color", "rgb(105, 176, 235)");
     submitButton.style("border", "0px solid white");
     submitButton.style("padding", "5px");
     submitButton.style("cursor", "pointer");
@@ -69,7 +69,7 @@ function setup() {
     let resetButton = createButton("Reload");
     resetButton.style("font-family", "Sligoil-Micro"); // 和 send 按钮的字体一致
     resetButton.style("font-size", "16px");
-    resetButton.style("color", "rgb(255, 255, 255)"); // 文字颜色
+    resetButton.style("color", "rgb(255, 253, 240)"); // 文字颜色
     resetButton.style("background", "none"); // 没有背景
     resetButton.style("border", "none"); // 去掉边框
     resetButton.style("padding", "5px");
@@ -88,7 +88,7 @@ function setup() {
     let saveButton = createButton("Save");
     saveButton.style("font-family", "Sligoil-Micro"); // 和 Send 按钮的字体一致
     saveButton.style("font-size", "16px");
-    saveButton.style("color", "rgb(255, 255, 255)"); // 文字颜色
+    saveButton.style("color", "rgb(255, 253, 240)"); // 文字颜色
     saveButton.style("background", "none"); // 无背景
     saveButton.style("border", "none"); // 无边框
     saveButton.style("padding", "5px");
@@ -106,7 +106,7 @@ function setup() {
     let aboutButton = createButton("About");
     aboutButton.style("font-family", "Sligoil-Micro");
     aboutButton.style("font-size", "16px");
-    aboutButton.style("color", "rgb(255, 255, 255)"); // 文字颜色
+    aboutButton.style("color", "rgb(255, 253, 240)"); // 文字颜色
     aboutButton.style("background", "none"); // 无背景
     aboutButton.style("border", "none"); // 无边框
     aboutButton.style("padding", "5px");
@@ -137,8 +137,8 @@ function setup() {
     
     infoBox.style("font-family", "Sligoil-Micro");
     infoBox.style("font-size", "14px");
-    infoBox.style("color", "rgb(255, 255, 255)"); // 文字颜色
-    infoBox.style("background", "rgb(191, 139, 255)"); 
+    infoBox.style("color", "rgb(240, 250, 255)"); // 文字颜色
+    infoBox.style("background", "rgb(91, 158, 212)"); 
     infoBox.style("padding", "5px");
     infoBox.style("border-radius", "0px");
     infoBox.style("position", "absolute");
@@ -160,8 +160,8 @@ function setup() {
     let hoverBox = createDiv("?");
     hoverBox.style("font-family", "TINY5x3-140");
     hoverBox.style("font-size", "52px"); 
-    hoverBox.style("color", "rgb(255, 255, 255)"); 
-    hoverBox.style("background", "rgb(177, 220, 255)"); 
+    hoverBox.style("color", "rgb(240, 250, 255)"); 
+    hoverBox.style("background", "rgba(121, 191, 218, 0.91)"); 
     hoverBox.style("border", "none");
     hoverBox.style("padding", "5px");
     hoverBox.style("cursor", "pointer");
@@ -182,9 +182,9 @@ function setup() {
         );          
         hoverBox.style("font-family", "Sligoil-Micro");
         hoverBox.style("font-size", "14px");
-        hoverBox.style("background", "rgb(255, 136, 255)"); 
+        hoverBox.style("background", "rgba(121, 191, 218, 0.91)"); 
         //hoverBox.style("border-radius", "5px");
-        hoverBox.style("color", "rgb(255, 255, 255)");
+        hoverBox.style("color", "rgb(240, 250, 255)");
         hoverBox.style("cursor", "default"); 
         hoverBox.style("width", "400px"); 
     });
@@ -194,9 +194,9 @@ function setup() {
         hoverBox.html("?");
         hoverBox.style("font-family", "TINY5x3-140");
         hoverBox.style("font-size", "52px"); 
-        hoverBox.style("background", "rgb(177, 220, 255)");
+        hoverBox.style("background", "rgba(121, 191, 218, 0.91)");
         hoverBox.style("border-radius", "0px");
-        hoverBox.style("color", "rgb(255, 255, 255)"); 
+        hoverBox.style("color", "rgb(240, 250, 255)"); 
         hoverBox.style("cursor", "default"); 
         hoverBox.style("width", "20px"); 
     });
@@ -204,7 +204,7 @@ function setup() {
     altitudeLabel = createDiv("Temperature");
     altitudeLabel.style("font-family", "Sligoil-Micro");
     altitudeLabel.style("font-size", "16px");
-    altitudeLabel.style("color", "#ffffff"); // 白色文字
+    altitudeLabel.style("color", "rgb(255, 253, 240)"); // 白色文字
     altitudeLabel.style("position", "absolute");
     altitudeLabel.style("cursor", "default");
 
@@ -214,14 +214,14 @@ function setup() {
     altitudeSlider.style("border", "none");
     altitudeSlider.style("cursor", "pointer");
     altitudeSlider.style("appearance", "none"); // 移除浏览器默认样式
-    altitudeSlider.style("background", "#ffffff"); // 滑轨颜色
+    altitudeSlider.style("background", "rgb(255, 253, 240)"); // 滑轨颜色
     altitudeSlider.style("height", "4px"); // 让滑轨更细
 
     // 创建显示数值的文本 div
     altitudeValueDisplay = createDiv("1.2");
     altitudeValueDisplay.style("font-family", "Sligoil-Micro");
     altitudeValueDisplay.style("font-size", "16px");
-    altitudeValueDisplay.style("color", "white");
+    altitudeValueDisplay.style("color", "rgb(255, 253, 240)");
     altitudeValueDisplay.style("position", "absolute");
     altitudeValueDisplay.position(width - 480, 25); // 让它在滑动条附近
 
@@ -239,7 +239,7 @@ function setup() {
     altitudeSlider.style(`
         -webkit-appearance: none;
         appearance: none;
-        background: #ffffff;
+        background:rgb(255, 253, 240);
         outline: none;
         height: 3px;
     `);
@@ -260,14 +260,14 @@ function setup() {
             appearance: none;
             width: 6px;
             height: 16px;
-            background: #ffffff;
+            background:rgb(255, 253, 240);
             cursor: pointer;
             border-radius: 0px; 
         }
         input[type="range"]::-moz-range-thumb {
             width: 16px;
             height: 8px;
-            background: #ffffff;
+            background: rgb(255, 253, 240);
             cursor: pointer;
             border-radius: 0px;
         }
@@ -291,10 +291,10 @@ function draw() {
     //fill("#fcf9f2");
     rect(-2, -2, width+2, height+2); // 透明遮罩
     image(video, 0, 0, width, height); // 画视频作为背景
-    fill(202, 226, 232, 180); // 100 表示透明度（0 完全透明，255 完全不透明）
+    fill(202, 226, 232, 200); // 100 表示透明度（0 完全透明，255 完全不透明）
     rect(-2, -2, width+2, height+2); 
 
-    fill(255);
+    fill(255, 254, 250);
     textFont(myFont); // 使用和输入框相同的字体
     textSize(52);
     textAlign(LEFT, CENTER);
@@ -345,7 +345,7 @@ function updateFallingWords() {
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
         let columnIndex = wordObj.column;
-        let targetY = columnHeights[columnIndex] - wordObj.size + random(25, 55);
+        let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
 
         // **检测鼠标靠近时的散开效果**
         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
@@ -381,7 +381,7 @@ function updateFallingWords() {
         textSize(wordObj.size);
         textFont(myFont);
         //fill(247, 239, 79);
-        fill(wordObj.color);
+        fill(255, 253, 247);
         textAlign(CENTER, CENTER);
         text(wordObj.text, 0, 0); // **注意：旋转后，(0,0) 作为文本中心**
         pop();
@@ -393,7 +393,7 @@ function addWord(text) {
     let columnWidth = width / 3;
     let columnIndex = fallingWords.length % 3; // 计算在哪一列
     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
-    let textSizeRand = random(50, 100);
+    let textSizeRand = random(50, 130);
     let initialY = -textSizeRand; // 初始位置在屏幕上方
 
     let randomSound = random(soundFiles);

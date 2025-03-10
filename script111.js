@@ -391,15 +391,17 @@ function draw() {
 function updateFallingWords() {
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
-        let columnIndex = wordObj.column;
-        let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
+
+        let targetY = height - wordObj.size - 20; // **强制落到底**
+        
+        if (wordObj.dragging) continue; // **如果在拖拽，跳过下落逻辑**
 
         // **鼠标靠近时的抖动**
         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
         if (d < 100 && !wordObj.dragging) { 
             wordObj.tX = wordObj.x + random(-40, 40);
             wordObj.tY = wordObj.y + random(-30, 30);
-        } else if (!wordObj.dragging) { // 只有非拖拽状态才会进行缓慢回归
+        } else if (!wordObj.dragging) {
             wordObj.tX = wordObj.x;
             wordObj.tY = wordObj.y;
         }
@@ -411,19 +413,18 @@ function updateFallingWords() {
         }
 
         // **让未停止的单词继续下落**
-        if (!wordObj.stopped && !wordObj.dragging) { 
+        if (!wordObj.stopped) { 
             wordObj.speed += gravity;
             wordObj.y += wordObj.speed;
 
             if (wordObj.y >= targetY) {
                 wordObj.y = targetY;
                 wordObj.speed = 0;
-                wordObj.stopped = true;
-                columnHeights[columnIndex] = wordObj.y - random(-55, 0);
+                wordObj.stopped = true; // **确保释放后能触底**
             }
         }
 
-        // **绘制单词（即使在拖动过程中也要显示！）**
+        // **绘制单词**
         push();
         translate(wordObj.x, wordObj.y);
         rotate(radians(wordObj.angle));
@@ -542,10 +543,14 @@ function mouseReleased() {
     for (let wordObj of fallingWords) {
         if (wordObj.dragging) {
             wordObj.dragging = false;
-            wordObj.speed = random(0.5, 3); // 让单词重新开始掉落
+            wordObj.speed = random(0.5, 3);
+            wordObj.stopped = false; // 释放后重新开始掉落
+            wordObj.tX = wordObj.x;
+            wordObj.tY = wordObj.y;
         }
     }
 }
+
 
 
 function saveGeneratedWords() {

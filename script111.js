@@ -394,24 +394,24 @@ function updateFallingWords() {
         let columnIndex = wordObj.column;
         let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
 
-        // 如果正在拖动，不执行下落逻辑
-        if (wordObj.dragging) continue;
-
         // **鼠标靠近时的抖动**
         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
-        if (d < 100) {
+        if (d < 100 && !wordObj.dragging) { 
             wordObj.tX = wordObj.x + random(-40, 40);
             wordObj.tY = wordObj.y + random(-30, 30);
-        } else {
+        } else if (!wordObj.dragging) { // 只有非拖拽状态才会进行缓慢回归
             wordObj.tX = wordObj.x;
             wordObj.tY = wordObj.y;
         }
 
-        wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
-        wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
+        // **让文字平滑回归原位**
+        if (!wordObj.dragging) { 
+            wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
+            wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
+        }
 
         // **让未停止的单词继续下落**
-        if (!wordObj.stopped) {
+        if (!wordObj.stopped && !wordObj.dragging) { 
             wordObj.speed += gravity;
             wordObj.y += wordObj.speed;
 
@@ -423,7 +423,7 @@ function updateFallingWords() {
             }
         }
 
-        // **绘制单词**
+        // **绘制单词（即使在拖动过程中也要显示！）**
         push();
         translate(wordObj.x, wordObj.y);
         rotate(radians(wordObj.angle));
@@ -435,7 +435,6 @@ function updateFallingWords() {
         pop();
     }
 }
-
 
 
 // function addWord(text) {
@@ -537,6 +536,7 @@ function mouseDragged() {
         }
     }
 }
+
 
 function mouseReleased() {
     for (let wordObj of fallingWords) {

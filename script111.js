@@ -120,7 +120,7 @@ function setup() {
 
     // 创建一个 infoBox 来显示信息
     let infoBox = createDiv(`
-        <strong>From the Cloud</strong><br>
+        <strong>From The Cloud</strong><br>
         An experiment with words and clouds 
         <br><br>
         Clouds are ephemeral and untouchable, long perceived as carriers of human emotions and metaphors of impermanence. 
@@ -300,7 +300,7 @@ function draw() {
     textFont(myFont); // 使用和输入框相同的字体
     textSize(52);
     textAlign(LEFT, CENTER);
-    text("From the Cloud", 50, 40);
+    text("From The Cloud", 50, 40);
 
     // fill(255);
     // textFont(inputFont); 

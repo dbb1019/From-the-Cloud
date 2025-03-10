@@ -4,7 +4,7 @@
 
 🌥️ Visit → [https://from-the-cloud.vercel.app/](https://from-the-cloud.vercel.app/)
 
-![From the Cloud](./assets/image.png)
+![From The Cloud](./assets/image.png)
 
 Clouds are ephemeral and untouchable, long perceived as carriers of human emotions and metaphors of impermanence. However, in the digital age, "the cloud" has been redefined as a rigid repository of data and algorithmic control.  Designed for efficiency, cloud computing systems suppress ambiguity, randomness, and serendipity, reducing uncertainty to error.They also ignored the nonlinearity, openness, and potential anti-control of the cloud.
 

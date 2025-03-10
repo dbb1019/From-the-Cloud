@@ -22,6 +22,8 @@ function setup() {
     columnHeights = Array(3).fill(height);
     cnv.position(-0, -0); // 确保 canvas 贴在左上角
     cnv.style("display", "block"); // 防止 canvas 下面有空隙
+
+    columnHeights = Array(3).fill(height); 
     
     video.hide();
     video.volume(0);
@@ -389,21 +391,27 @@ function draw() {
 // }
 
 function updateFallingWords() {
+    let maxHeightLimit = height*3 / 4; 
+    
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
+        let columnIndex = wordObj.column;
 
-        let targetY = height - wordObj.size + random(30, 60); // **确保落到底部**
-        
-        // **如果正在拖拽，直接显示在鼠标位置**
+        // **计算当前列的堆叠高度**
+        let targetY = columnHeights[columnIndex] - wordObj.size + random(20, 40);
+
+        // **确保堆叠不会超出 maxHeightLimit**
+        targetY = max(targetY, maxHeightLimit);
+
         if (wordObj.dragging) {
-            drawWord(wordObj); 
-            continue; // **跳过其他逻辑**
+            drawWord(wordObj);
+            continue;
         }
 
         // **鼠标靠近时的抖动**
         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
         if (d < 100) { 
-            wordObj.tX = wordObj.x + random(-40, 40);
+            wordObj.tX = wordObj.x + random(-30, 30);
             wordObj.tY = wordObj.y + random(-30, 30);
         } else {
             wordObj.tX = wordObj.x;
@@ -423,13 +431,15 @@ function updateFallingWords() {
                 wordObj.y = targetY;
                 wordObj.speed = 0;
                 wordObj.stopped = true; 
+
+                // **更新该列的堆叠高度**
+                columnHeights[columnIndex] = wordObj.y - random(20, 40);
             }
         }
 
-        drawWord(wordObj); // **绘制单词**
+        drawWord(wordObj);
     }
 }
-
 
 
 // function addWord(text) {
@@ -489,10 +499,10 @@ function addWord(text) {
 
     let wordColor = random(colors);
 
+    // **初始化该列的堆叠高度**
     if (columnHeights[columnIndex] === undefined) {
-        columnHeights[columnIndex] = height; // **初始化列高度**
+        columnHeights[columnIndex] = height; // **初始堆叠高度设为地面**
     }
-    
 
     fallingWords.push({
         text: text,
@@ -505,12 +515,13 @@ function addWord(text) {
         angle: random(-4, 4),
         column: columnIndex,
         stopped: false,
-        dragging: false, // 是否正在拖拽
-        offsetX: 0, // 记录鼠标相对于单词的偏移
+        dragging: false, 
+        offsetX: 0, 
         offsetY: 0,
         color: wordColor
     });
 }
+
 
 function mousePressed() {
     for (let i = fallingWords.length - 1; i >= 0; i--) {
@@ -558,7 +569,13 @@ function mouseReleased() {
         if (wordObj.dragging) {
             wordObj.dragging = false;
             wordObj.speed = random(0.5, 3);
-            wordObj.stopped = false; // **松开后允许继续掉落**
+            wordObj.stopped = false; 
+
+            // **确保它仍然会按照当前列的高度进行堆叠**
+            let columnIndex = wordObj.column;
+            let newTargetY = columnHeights[columnIndex] - random(20, 40);
+            wordObj.tY = max(newTargetY, height / 2); // **确保堆叠不会超出 maxHeightLimit**
+            columnHeights[columnIndex] = wordObj.tY; 
         }
     }
 }

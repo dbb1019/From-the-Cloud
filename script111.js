@@ -176,7 +176,7 @@ function setup() {
     hoverBox.mouseOver(() => {
         hoverBox.html(
             "Click the blue box, enter a single word (in English), and send it to the cloud.<br><br>" +
-            "If the words stack on top of each other but you want to see them clearly (or unclearly), try move, drag and release your mouse over the area to reveal them.<br><br>" +
+            "If the words stack on top of each other but you want to see them clearly (or unclearly), try move, drag and release your mouse.<br><br>" +
             "Move the Temperature slider to adjust the randomness of the response.<br><br>" +
             "To save all the words, click Save to download them.<br><br>" +
             "If there are too many, click Reload.<br><br>" +

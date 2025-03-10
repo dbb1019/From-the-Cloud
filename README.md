@@ -1,4 +1,4 @@
-# **From the Cloud**  
+# **From The Cloud**  
 
 ### *An experiment with words and clouds*
 

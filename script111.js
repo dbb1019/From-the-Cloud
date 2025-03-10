@@ -176,7 +176,7 @@ function setup() {
     hoverBox.mouseOver(() => {
         hoverBox.html(
             "Click the blue box, enter a single word (in English), and send it to the cloud.<br><br>" +
-            "If the words stack on top of each other but you want to see them clearly (or unclearly), try moving your mouse over the area to reveal them.<br><br>" +
+            "If the words stack on top of each other but you want to see them clearly (or unclearly), try move, drag and release your mouse over the area to reveal them.<br><br>" +
             "Move the Temperature slider to adjust the randomness of the response.<br><br>" +
             "To save all the words, click Save to download them.<br><br>" +
             "If there are too many, click Reload.<br><br>" +
@@ -398,7 +398,7 @@ function updateFallingWords() {
         let columnIndex = wordObj.column;
 
         // **计算当前列的堆叠高度**
-        let targetY = columnHeights[columnIndex] - wordObj.size + random(40, 70);
+        let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
 
         // **确保堆叠不会超出 maxHeightLimit**
         targetY = max(targetY, maxHeightLimit);
@@ -433,7 +433,7 @@ function updateFallingWords() {
                 wordObj.stopped = true; 
 
                 // **更新该列的堆叠高度**
-                columnHeights[columnIndex] = wordObj.y  - random(-55, 0);
+                columnHeights[columnIndex] = wordObj.y  - random(-60, 0);
             }
         }
 

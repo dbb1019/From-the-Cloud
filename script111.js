@@ -7,6 +7,7 @@ let altitudeSlider;
 let altitudeValue = 1;
 let soundFiles = []; // 存储音频
 
+
 function preload() {
     myFont = loadFont("assets/TINY5x3-140.otf");
     inputFont = loadFont("assets/Sligoil-Micro.otf");
@@ -16,6 +17,7 @@ function preload() {
         soundFiles.push(loadSound(`assets/breath${i}.wav`));
     }
 }
+
 
 function setup() {
     let cnv = createCanvas(windowWidth/1, windowHeight/1);
@@ -277,16 +279,19 @@ function setup() {
     document.head.appendChild(style);
 }
 
+
 function updateButtonPosition() {
     let inputX = input.position().x;
     let inputWidth = parseInt(input.style("width"));
     submitButton.position(inputX + inputWidth + 10, 99);
 }
 
+
 function updateChatTone(value) {
     // 这里可以根据滑动条数值调整 ChatGPT 回答风格
     console.log("Altitude:", value); // 这里可以用来检查数值变化
 }
+
 
 function draw() {
     
@@ -343,6 +348,7 @@ function draw() {
     //console.log("Slider Value:", altitudeSlider.value()); 
 }
 
+
 // function updateFallingWords() {
 //     for (let i = 0; i < fallingWords.length; i++) {
 //         let wordObj = fallingWords[i];
@@ -390,8 +396,9 @@ function draw() {
 //     }
 // }
 
+
 function updateFallingWords() {
-    let maxHeightLimit = -50; 
+    let maxHeightLimit = -200; 
     
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
@@ -539,18 +546,6 @@ function mousePressed() {
     }
 }
 
-function drawWord(wordObj) {
-    push();
-    translate(wordObj.x, wordObj.y);
-    rotate(radians(wordObj.angle));
-    fill(wordObj.color);
-    textSize(wordObj.size);
-    textFont(myFont);
-    textAlign(CENTER, CENTER);
-    text(wordObj.text, 0, 0);
-    pop();
-}
-
 
 function mouseDragged() {
     for (let wordObj of fallingWords) {
@@ -559,6 +554,9 @@ function mouseDragged() {
             wordObj.y = mouseY - wordObj.offsetY;
             wordObj.tX = wordObj.x; // **防止 lerp() 影响拖拽**
             wordObj.tY = wordObj.y;
+            
+            // **防止拖拽超出屏幕**
+            wordObj.y = constrain(wordObj.y, 0, height);
         }
     }
 }
@@ -571,11 +569,19 @@ function mouseReleased() {
             wordObj.speed = random(0.5, 3);
             wordObj.stopped = false; 
 
-            // **确保它仍然会按照当前列的高度进行堆叠**
             let columnIndex = wordObj.column;
+
+            // **更新目标Y位置**
             let newTargetY = columnHeights[columnIndex] - random(20, 40);
-            wordObj.tY = max(newTargetY, height / 2); // **确保堆叠不会超出 maxHeightLimit**
-            columnHeights[columnIndex] = wordObj.tY; 
+
+            // **如果释放的位置比当前堆叠高度更低，则更新堆叠高度**
+            if (wordObj.y > columnHeights[columnIndex]) {
+                columnHeights[columnIndex] = wordObj.y + random(10, 30); // **向下堆积**
+            }
+
+            // **确保堆积不会超出最大高度**
+            wordObj.tY = max(newTargetY, height / 2);
+            columnHeights[columnIndex] = max(columnHeights[columnIndex], wordObj.tY);
         }
     }
 }

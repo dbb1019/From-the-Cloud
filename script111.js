@@ -391,7 +391,7 @@ function draw() {
 // }
 
 function updateFallingWords() {
-    let maxHeightLimit = height*1.2; 
+    let maxHeightLimit = height; 
     
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
@@ -433,7 +433,7 @@ function updateFallingWords() {
                 wordObj.stopped = true; 
 
                 // **更新该列的堆叠高度**
-                columnHeights[columnIndex] = wordObj.y - random(0, 20);
+                columnHeights[columnIndex] = wordObj.y  - random(-55, 0);
             }
         }
 

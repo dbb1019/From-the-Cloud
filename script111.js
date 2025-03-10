@@ -433,7 +433,7 @@ function updateFallingWords() {
                 wordObj.stopped = true; 
 
                 // **更新该列的堆叠高度**
-                columnHeights[columnIndex] = wordObj.y - random(-60, 0);
+                columnHeights[columnIndex] = wordObj.y - random(0, 20);
             }
         }
 

@@ -568,7 +568,7 @@ function mouseReleased() {
             wordObj.stopped = false; 
 
             // **确保它直接落到底部，而不是堆叠**
-            wordObj.tY = height - random(60, 100); // 让它落到接近底部
+            wordObj.tY = height + random(60, 100); // 让它落到接近底部
             //columnHeights[wordObj.column] = wordObj.tY; // 更新列高度，防止影响正常堆叠的单词
         }
     }

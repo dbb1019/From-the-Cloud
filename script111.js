@@ -341,27 +341,76 @@ function draw() {
     //console.log("Slider Value:", altitudeSlider.value()); 
 }
 
+// function updateFallingWords() {
+//     for (let i = 0; i < fallingWords.length; i++) {
+//         let wordObj = fallingWords[i];
+//         let columnIndex = wordObj.column;
+//         let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
+
+//         // **检测鼠标靠近时的散开效果**
+//         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
+//         if (d < 100) { // 当鼠标靠近 100 像素范围内
+//             wordObj.tX = wordObj.x + random(-40, 40);
+//             wordObj.tY = wordObj.y + random(-30, 30);
+//         } else {
+//             wordObj.tX = wordObj.x; // 远离后回归原位
+//             wordObj.tY = wordObj.y;
+//         }
+
+//         // **让文字平滑移动到目标位置**
+//         wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
+//         wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
+
+//         // **下落逻辑**
+//         if (!wordObj.stopped) {
+//             wordObj.speed += gravity;
+//             wordObj.y += wordObj.speed;
+
+//             if (wordObj.y >= targetY) {
+//                 wordObj.y = targetY;
+//                 wordObj.speed = 0;
+//                 wordObj.stopped = true;
+//                 columnHeights[columnIndex] = wordObj.y - random(-55, 0);
+//             }
+//         }
+
+//         // **绘制文字（带旋转效果）**
+//         push();
+//         translate(wordObj.x, wordObj.y); // **移动到 (x, y)**
+//         rotate(radians(wordObj.angle));  // **应用随机角度**
+//         fill(wordObj.color);
+//         textSize(wordObj.size);
+//         textFont(myFont);
+//         //fill(247, 239, 79); 
+//         textAlign(CENTER, CENTER);
+//         text(wordObj.text, 0, 0); // **注意：旋转后，(0,0) 作为文本中心**
+//         pop();
+//     }
+// }
+
 function updateFallingWords() {
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
         let columnIndex = wordObj.column;
         let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
 
-        // **检测鼠标靠近时的散开效果**
+        // 如果正在拖动，不执行下落逻辑
+        if (wordObj.dragging) continue;
+
+        // **鼠标靠近时的抖动**
         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
-        if (d < 100) { // 当鼠标靠近 100 像素范围内
+        if (d < 100) {
             wordObj.tX = wordObj.x + random(-40, 40);
             wordObj.tY = wordObj.y + random(-30, 30);
         } else {
-            wordObj.tX = wordObj.x; // 远离后回归原位
+            wordObj.tX = wordObj.x;
             wordObj.tY = wordObj.y;
         }
 
-        // **让文字平滑移动到目标位置**
         wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
         wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
 
-        // **下落逻辑**
+        // **让未停止的单词继续下落**
         if (!wordObj.stopped) {
             wordObj.speed += gravity;
             wordObj.y += wordObj.speed;
@@ -374,27 +423,63 @@ function updateFallingWords() {
             }
         }
 
-        // **绘制文字（带旋转效果）**
+        // **绘制单词**
         push();
-        translate(wordObj.x, wordObj.y); // **移动到 (x, y)**
-        rotate(radians(wordObj.angle));  // **应用随机角度**
+        translate(wordObj.x, wordObj.y);
+        rotate(radians(wordObj.angle));
         fill(wordObj.color);
         textSize(wordObj.size);
         textFont(myFont);
-        //fill(247, 239, 79); 
         textAlign(CENTER, CENTER);
-        text(wordObj.text, 0, 0); // **注意：旋转后，(0,0) 作为文本中心**
+        text(wordObj.text, 0, 0);
         pop();
     }
 }
 
 
+
+// function addWord(text) {
+//     let columnWidth = width / 3;
+//     let columnIndex = fallingWords.length % 3; // 计算在哪一列
+//     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
+//     let textSizeRand = random(50, 130);
+//     let initialY = -textSizeRand; // 初始位置在屏幕上方
+
+//     let randomSound = random(soundFiles);
+//     if (randomSound && !randomSound.isPlaying()) {
+//         randomSound.play();
+//     }
+
+//     let colors = [
+//         color(255, 253, 247), 
+//         color(255, 253, 247), 
+//         color(250, 250, 242),
+//         color(136, 191, 209)
+//     ];
+
+//     let wordColor = random(colors);
+
+//     fallingWords.push({
+//         text: text,
+//         x: xPos,
+//         y: initialY,
+//         tX: xPos, // 目标 X 坐标
+//         tY: initialY, // 目标 Y 坐标
+//         speed: random(0.1, 3),
+//         size: textSizeRand,
+//         angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
+//         column: columnIndex,
+//         stopped: false,
+//         color: wordColor // 存储颜色
+//     });
+// }
+
 function addWord(text) {
     let columnWidth = width / 3;
-    let columnIndex = fallingWords.length % 3; // 计算在哪一列
+    let columnIndex = fallingWords.length % 3; 
     let xPos = columnIndex * columnWidth + random(60, columnWidth - 100);
     let textSizeRand = random(50, 130);
-    let initialY = -textSizeRand; // 初始位置在屏幕上方
+    let initialY = -textSizeRand;
 
     let randomSound = random(soundFiles);
     if (randomSound && !randomSound.isPlaying()) {
@@ -414,15 +499,52 @@ function addWord(text) {
         text: text,
         x: xPos,
         y: initialY,
-        tX: xPos, // 目标 X 坐标
-        tY: initialY, // 目标 Y 坐标
+        tX: xPos,
+        tY: initialY,
         speed: random(0.1, 3),
         size: textSizeRand,
-        angle: random(-4, 4), // **每个单词有一个随机角度（-10° 到 10°）**
+        angle: random(-4, 4),
         column: columnIndex,
         stopped: false,
-        color: wordColor // 存储颜色
+        dragging: false, // 是否正在拖拽
+        offsetX: 0, // 记录鼠标相对于单词的偏移
+        offsetY: 0,
+        color: wordColor
     });
+}
+
+function mousePressed() {
+    for (let i = fallingWords.length - 1; i >= 0; i--) {
+        let wordObj = fallingWords[i];
+        let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
+
+        if (d < wordObj.size / 1.5) { // 如果点击到了单词
+            wordObj.dragging = true;
+            wordObj.offsetX = mouseX - wordObj.x;
+            wordObj.offsetY = mouseY - wordObj.y;
+            wordObj.speed = 0; // 停止下落
+            wordObj.stopped = false; // 让单词可以重新掉落
+            break;
+        }
+    }
+}
+
+function mouseDragged() {
+    for (let wordObj of fallingWords) {
+        if (wordObj.dragging) {
+            wordObj.x = mouseX - wordObj.offsetX;
+            wordObj.y = mouseY - wordObj.offsetY;
+        }
+    }
+}
+
+function mouseReleased() {
+    for (let wordObj of fallingWords) {
+        if (wordObj.dragging) {
+            wordObj.dragging = false;
+            wordObj.speed = random(0.5, 3); // 让单词重新开始掉落
+        }
+    }
 }
 
 

@@ -392,44 +392,32 @@ function draw() {
 
 
 function updateFallingWords() {
-    let maxHeightLimit = -200;
-
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
-        let columnIndex = wordObj.column;
-        let targetY = columnHeights[columnIndex] - wordObj.size + random(30, 60);
 
-        targetY = max(targetY, maxHeightLimit);
-
+        // **拖拽时直接显示，不执行下落逻辑**
         if (wordObj.dragging) {
             drawWord(wordObj);
             continue;
         }
 
-        // **鼠标靠近时的抖动**
-        let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
-        if (d < 100) {
-            wordObj.tX = wordObj.x + random(-30, 30);
-            wordObj.tY = wordObj.y + random(-30, 30);
-        } else {
-            wordObj.tX = wordObj.x;
-            wordObj.tY = wordObj.y;
-        }
-
-        // **平滑回归原位**
-        wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
-        wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
-
-        // **让未停止的单词继续下落**
-        if (!wordObj.stopped) {
+        // **正常下落的单词继续堆叠**
+        if (!wordObj.stopped) { 
             wordObj.speed += gravity;
             wordObj.y += wordObj.speed;
 
-            if (wordObj.y >= targetY) {
-                wordObj.y = targetY;
+            // **如果是拖拽释放的单词，直接落到底**
+            if (wordObj.tY >= height - 60) { 
+                wordObj.y = height - random(30, 60); // 落到底部
                 wordObj.speed = 0;
                 wordObj.stopped = true;
-                columnHeights[columnIndex] = wordObj.y - random(-60, 0);
+            } 
+            // **正常堆叠的单词按列高度落下**
+            else if (wordObj.y >= columnHeights[wordObj.column]) {
+                wordObj.y = columnHeights[wordObj.column];
+                wordObj.speed = 0;
+                wordObj.stopped = true; 
+                columnHeights[wordObj.column] -= random(40, 80); // 更新堆叠高度
             }
         }
 
@@ -564,15 +552,12 @@ function mouseReleased() {
     for (let wordObj of fallingWords) {
         if (wordObj.dragging) {
             wordObj.dragging = false;
-            wordObj.speed = random(1, 3); // 释放后让它有一个初始速度
-            wordObj.stopped = false; // 让它继续下落
-            
-            let columnIndex = wordObj.column;
-            let newTargetY = columnHeights[columnIndex] - random(20, 40);
+            wordObj.speed = random(2, 5); // 释放后加点初始速度
+            wordObj.stopped = false; 
 
-            // **确保释放后单词可以继续自由下落**
-            wordObj.tY = newTargetY;
-            columnHeights[columnIndex] = newTargetY;
+            // **确保它直接落到底部，而不是堆叠**
+            wordObj.tY = height - random(30, 60); // 让它落到接近底部
+            columnHeights[wordObj.column] = wordObj.tY; // 更新列高度，防止影响正常堆叠的单词
         }
     }
 }

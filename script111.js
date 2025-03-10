@@ -388,16 +388,16 @@ function draw() {
 //     }
 // }
 
-
 function updateFallingWords() {
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
-        let columnIndex = wordObj.column;
-        let targetY = columnHeights[columnIndex] - wordObj.size + random(20, 40); // **随机一点高度，制造堆叠**
 
+        let targetY = height - wordObj.size + random(30, 60); // **确保落到底部**
+        
+        // **如果正在拖拽，直接显示在鼠标位置**
         if (wordObj.dragging) {
             drawWord(wordObj); 
-            continue;
+            continue; // **跳过其他逻辑**
         }
 
         // **鼠标靠近时的抖动**
@@ -410,11 +410,11 @@ function updateFallingWords() {
             wordObj.tY = wordObj.y;
         }
 
-        // **平滑回归**
+        // **让文字平滑回归原位**
         wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
         wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
 
-        // **继续下落**
+        // **让未停止的单词继续下落**
         if (!wordObj.stopped) { 
             wordObj.speed += gravity;
             wordObj.y += wordObj.speed;
@@ -422,14 +422,11 @@ function updateFallingWords() {
             if (wordObj.y >= targetY) {
                 wordObj.y = targetY;
                 wordObj.speed = 0;
-                wordObj.stopped = true;
-
-                // **更新该列的高度，形成堆叠**
-                columnHeights[columnIndex] = wordObj.y - random(30, 60);
+                wordObj.stopped = true; 
             }
         }
 
-        drawWord(wordObj);
+        drawWord(wordObj); // **绘制单词**
     }
 }
 
@@ -561,14 +558,7 @@ function mouseReleased() {
         if (wordObj.dragging) {
             wordObj.dragging = false;
             wordObj.speed = random(0.5, 3);
-            wordObj.stopped = false;
-
-            // **找到当前列的最高点，并叠加**
-            let columnIndex = wordObj.column;
-            let newTargetY = columnHeights[columnIndex] - random(30, 60); // **随机一点高度，增强堆叠感**
-            
-            wordObj.tY = newTargetY;
-            columnHeights[columnIndex] = newTargetY; // **更新列的高度**
+            wordObj.stopped = false; // **松开后允许继续掉落**
         }
     }
 }

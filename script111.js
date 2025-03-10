@@ -539,6 +539,18 @@ function mousePressed() {
     }
 }
 
+function drawWord(wordObj) {
+    push();
+    translate(wordObj.x, wordObj.y);
+    rotate(radians(wordObj.angle));
+    fill(wordObj.color);
+    textSize(wordObj.size);
+    textFont(myFont);
+    textAlign(CENTER, CENTER);
+    text(wordObj.text, 0, 0);
+    pop();
+}
+
 
 function mouseDragged() {
     for (let wordObj of fallingWords) {

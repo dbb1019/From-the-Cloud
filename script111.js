@@ -391,7 +391,7 @@ function draw() {
 // }
 
 function updateFallingWords() {
-    let maxHeightLimit = height; 
+    let maxHeightLimit = -50; 
     
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];

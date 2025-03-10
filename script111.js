@@ -392,25 +392,27 @@ function updateFallingWords() {
     for (let i = 0; i < fallingWords.length; i++) {
         let wordObj = fallingWords[i];
 
-        let targetY = height - wordObj.size - 20; // **强制落到底**
+        let targetY = height - wordObj.size + random(0, 60); // **确保落到底部**
         
-        if (wordObj.dragging) continue; // **如果在拖拽，跳过下落逻辑**
+        // **如果正在拖拽，直接显示在鼠标位置**
+        if (wordObj.dragging) {
+            drawWord(wordObj); 
+            continue; // **跳过其他逻辑**
+        }
 
         // **鼠标靠近时的抖动**
         let d = dist(mouseX, mouseY, wordObj.x, wordObj.y);
-        if (d < 100 && !wordObj.dragging) { 
+        if (d < 100) { 
             wordObj.tX = wordObj.x + random(-40, 40);
             wordObj.tY = wordObj.y + random(-30, 30);
-        } else if (!wordObj.dragging) {
+        } else {
             wordObj.tX = wordObj.x;
             wordObj.tY = wordObj.y;
         }
 
         // **让文字平滑回归原位**
-        if (!wordObj.dragging) { 
-            wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
-            wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
-        }
+        wordObj.x = lerp(wordObj.x, wordObj.tX, 0.3);
+        wordObj.y = lerp(wordObj.y, wordObj.tY, 0.3);
 
         // **让未停止的单词继续下落**
         if (!wordObj.stopped) { 
@@ -420,22 +422,14 @@ function updateFallingWords() {
             if (wordObj.y >= targetY) {
                 wordObj.y = targetY;
                 wordObj.speed = 0;
-                wordObj.stopped = true; // **确保释放后能触底**
+                wordObj.stopped = true; 
             }
         }
 
-        // **绘制单词**
-        push();
-        translate(wordObj.x, wordObj.y);
-        rotate(radians(wordObj.angle));
-        fill(wordObj.color);
-        textSize(wordObj.size);
-        textFont(myFont);
-        textAlign(CENTER, CENTER);
-        text(wordObj.text, 0, 0);
-        pop();
+        drawWord(wordObj); // **绘制单词**
     }
 }
+
 
 
 // function addWord(text) {
@@ -529,11 +523,26 @@ function mousePressed() {
     }
 }
 
+function drawWord(wordObj) {
+    push();
+    translate(wordObj.x, wordObj.y);
+    rotate(radians(wordObj.angle));
+    fill(wordObj.color);
+    textSize(wordObj.size);
+    textFont(myFont);
+    textAlign(CENTER, CENTER);
+    text(wordObj.text, 0, 0);
+    pop();
+}
+
+
 function mouseDragged() {
     for (let wordObj of fallingWords) {
         if (wordObj.dragging) {
             wordObj.x = mouseX - wordObj.offsetX;
             wordObj.y = mouseY - wordObj.offsetY;
+            wordObj.tX = wordObj.x; // **防止 lerp() 影响拖拽**
+            wordObj.tY = wordObj.y;
         }
     }
 }
@@ -544,13 +553,10 @@ function mouseReleased() {
         if (wordObj.dragging) {
             wordObj.dragging = false;
             wordObj.speed = random(0.5, 3);
-            wordObj.stopped = false; // 释放后重新开始掉落
-            wordObj.tX = wordObj.x;
-            wordObj.tY = wordObj.y;
+            wordObj.stopped = false; // **松开后允许继续掉落**
         }
     }
 }
-
 
 
 function saveGeneratedWords() {

@@ -168,7 +168,7 @@ function setup() {
     hoverBox.style("padding", "5px");
     hoverBox.style("cursor", "pointer");
     hoverBox.style("position", "absolute");
-    hoverBox.position(315, 20); 
+    hoverBox.position(318, 20); 
     hoverBox.style("cursor", "default"); 
     hoverBox.style("width", "20px"); 
 
